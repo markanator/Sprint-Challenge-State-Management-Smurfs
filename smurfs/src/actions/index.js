@@ -7,6 +7,7 @@ export const FETCH_DATA_START   = "FETCH_DATA_START";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 export const FETCH_DATA_FAIL    = "FETCH_DATA_FAIL";
 export const ADD_SMURF          = "ADD_SMURF";
+export const ADD_SMURF_SUCCESS  = "ADD_SMURF_SUCCESS";
 
 
 export const getData = () => dispatch => {
