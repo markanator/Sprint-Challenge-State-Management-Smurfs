@@ -13,6 +13,8 @@ function App() {
     const dispatch = useDispatch(SmurfReducer)
     const Data = useSelector(state => state.data);
 
+    const [dis,setDis] = useState(false);
+
     // get data
     const fetchData = () => dispatch(actions.getData());
 
@@ -43,15 +45,20 @@ function App() {
 
     return (
         <div className="App">
-            <form onSubmit={(e) => {
+            <Form onSubmit={(e) => {
                 e.preventDefault();
                 console.log("submitted form!");
-                console.table(formData);
+                dispatch(actions.addSmurf(formData));
+                setDis(true);
+                setTimeout(()=>{
+                  fetchData();
+                  setDis(false);
+                },1000)
             }}>
               <FormText>INPUT NEW SMURF</FormText>
                 <FormGroup>
                     <Label>Name:
-                        <input
+                        <Input
                             id="name"
                             name="name"
                             type="text"
@@ -63,7 +70,7 @@ function App() {
 
                 <FormGroup>
                     <Label>Age:
-                        <input
+                        <Input
                             type='number'
                             name='age'
                             value={formData.age}
@@ -73,7 +80,7 @@ function App() {
 
                 <FormGroup>
                     <Label>Height:
-                        <input
+                        <Input
                             type='text'
                             name='height'
                             placeholder='3cm'
@@ -82,9 +89,9 @@ function App() {
                     </Label>
                 </FormGroup>
 
-                <Button type='submit' color='primary'>Submit</Button>
+                <Button type='submit' color='primary' disabled={dis}>Submit</Button>
 
-            </form>
+            </Form>
 
             {Data.length === 0
                 ? <p>loading...</p>

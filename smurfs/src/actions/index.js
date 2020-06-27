@@ -23,6 +23,12 @@ export const getData = () => dispatch => {
 
 }
 
-export const addSmurf = newSmurf =>{
-    return {type: ADD_SMURF, payload: newSmurf};
+export const addSmurf = newSmurf =>dispatch=> {
+    dispatch({type: ADD_SMURF, payload: newSmurf});
+    axios.post("http://localhost:3333/smurfs",newSmurf)
+    .then((resp)=>{
+        console.log(resp)
+        dispatch({type: FETCH_DATA_START});
+    })
+    .catch((err)=>console.log(err));
 }
