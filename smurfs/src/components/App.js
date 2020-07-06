@@ -25,14 +25,12 @@ function App() {
     const dispatch = useDispatch(SmurfReducer)
     const Data = useSelector(state => state.data);
 
-    const [dis,
-        setDis] = useState(false);
+    const [dis,setDis] = useState(false);
 
     // get data
     const fetchData = () => dispatch(actions.getData());
 
-    const [formData,
-        setFormData] = useState({
+    const [formData,setFormData] = useState({
         name: "",
         age: 0,
         height: "",
@@ -40,28 +38,32 @@ function App() {
     })
 
     const handleChange = e => {
-        setFormData({
-            ...formData,
+        setFormData({...formData,
             [e.target.name]: e.target.value
         });
-        console.log(e.target.name, e.target.value)
+        // console.log(e.target.name, e.target.value)
     }
 
     const renderSmurfs = () => {
         return Data.map((smurf) => {
             return (
                 <Card key={smurf.id} className='smurf-item'>
-                    <CardGroup>
-                        <CardText>Name: {smurf.name}</CardText>
-                    </CardGroup>
-
-                    <CardGroup>
-                        <CardText>Age: {smurf.age}</CardText>
-                    </CardGroup>
-
-                    <CardGroup>
-                        <CardText>Height: {smurf.height}</CardText>
-                    </CardGroup>
+                    <CardHeader>
+                        <Button color='danger'>
+                            <i class="fas fa-trash-alt"></i>
+                        </Button>
+                    </CardHeader>
+                    <div className='card-inner'>
+                        <CardGroup>
+                            <CardText>Name: {smurf.name}</CardText>
+                        </CardGroup>
+                        <CardGroup>
+                            <CardText>Age: {smurf.age}</CardText>
+                        </CardGroup>
+                        <CardGroup>
+                            <CardText>Height: {smurf.height}</CardText>
+                        </CardGroup>
+                    </div>
                 </Card>
             )
         })
@@ -87,7 +89,7 @@ function App() {
                         setTimeout(() => {
                             fetchData();
                             setDis(false);
-                        }, 1000)
+                        }, 1500)
                     }}>
                         <FormGroup>
                             <Label>Name:
@@ -123,7 +125,7 @@ function App() {
             <div className='smurf-container'>
 
                 {
-                  Data.length === 0
+                    Data.length === 0
                     ? <p>loading...</p>
                     : renderSmurfs()
                 }

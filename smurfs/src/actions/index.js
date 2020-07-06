@@ -9,6 +9,8 @@ export const FETCH_DATA_FAIL    = "FETCH_DATA_FAIL";
 export const ADD_SMURF          = "ADD_SMURF";
 export const ADD_SMURF_SUCCESS  = "ADD_SMURF_SUCCESS";
 
+export const DELETE_SMURF       = "DELETE_SMURF";
+
 
 export const getData = () => dispatch => {
     dispatch({type: FETCH_DATA_START});
@@ -28,7 +30,17 @@ export const addSmurf = newSmurf =>dispatch=> {
     dispatch({type: ADD_SMURF, payload: newSmurf});
     axios.post("http://localhost:3333/smurfs",newSmurf)
     .then((resp)=>{
-        console.log(resp)
+        // console.log(resp)
+        dispatch({type: FETCH_DATA_START});
+    })
+    .catch((err)=>console.log(err));
+}
+
+export const deleteSmurf = oldSmurf =>  dispatch =>{
+    dispatch({type: DELETE_SMURF, payload: oldSmurf});
+    axios.delete(`http://localhost:3333/smurfs/`)
+    .then((resp)=>{
+        console.log(resp);
         dispatch({type: FETCH_DATA_START});
     })
     .catch((err)=>console.log(err));

@@ -1,8 +1,9 @@
-import {FETCH_DATA_START} from '../actions';
+import {FETCH_DATA_START}   from '../actions';
 import {FETCH_DATA_SUCCESS} from '../actions';
-import {FETCH_DATA_FAIL} from '../actions';
-import {ADD_SMURF} from '../actions';
-import {ADD_SMURF_SUCCESS} from '../actions';
+import {FETCH_DATA_FAIL}    from '../actions';
+import {ADD_SMURF}          from '../actions';
+import {ADD_SMURF_SUCCESS}  from '../actions';
+import {DELETE_SMURF}       from '../actions';
 
 // Reducers
 const initialState = {
@@ -32,9 +33,11 @@ export const SmurfReducer = (state = initialState, action ) => {
             }
         case ADD_SMURF:
             return state;
-        case ADD_SMURF_SUCCESS:
-            return state;
-        default:
+            case ADD_SMURF_SUCCESS:
+                return state;
+            case DELETE_SMURF:
+                return state;
+            default:
             return state;
     }
 }

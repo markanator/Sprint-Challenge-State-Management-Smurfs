@@ -19,6 +19,9 @@ body {
 
 .smurf-item{
   width: 200px;
-  height: 100px;
+  height: 200px;
+}
+
+.smurf-item .card-inner{
   padding: 15px;
 }
