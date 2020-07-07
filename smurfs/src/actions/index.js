@@ -36,12 +36,12 @@ export const addSmurf = newSmurf =>dispatch=> {
     .catch((err)=>console.log(err));
 }
 
-export const deleteSmurf = oldSmurf =>  dispatch =>{
-    dispatch({type: DELETE_SMURF, payload: oldSmurf});
-    axios.delete(`http://localhost:3333/smurfs/`)
+export const deleteSmurf = smurfID =>  dispatch =>{
+    dispatch({type: DELETE_SMURF, payload: smurfID});
+    axios.delete(`http://localhost:3333/smurfs/${smurfID}`)
     .then((resp)=>{
         console.log(resp);
-        dispatch({type: FETCH_DATA_START});
+        dispatch({type: FETCH_DATA_SUCCESS,payload: resp.data})
     })
     .catch((err)=>console.log(err));
 }

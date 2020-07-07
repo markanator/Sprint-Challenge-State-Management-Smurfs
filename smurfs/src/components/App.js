@@ -25,12 +25,14 @@ function App() {
     const dispatch = useDispatch(SmurfReducer)
     const Data = useSelector(state => state.data);
 
-    const [dis,setDis] = useState(false);
+    const [dis,
+        setDis] = useState(false);
 
     // get data
     const fetchData = () => dispatch(actions.getData());
 
-    const [formData,setFormData] = useState({
+    const [formData,
+        setFormData] = useState({
         name: "",
         age: 0,
         height: "",
@@ -38,7 +40,8 @@ function App() {
     })
 
     const handleChange = e => {
-        setFormData({...formData,
+        setFormData({
+            ...formData,
             [e.target.name]: e.target.value
         });
         // console.log(e.target.name, e.target.value)
@@ -49,8 +52,10 @@ function App() {
             return (
                 <Card key={smurf.id} className='smurf-item'>
                     <CardHeader>
-                        <Button color='danger'>
-                            <i class="fas fa-trash-alt"></i>
+                        <Button color='danger' onClick={()=>{
+                            dispatch(actions.deleteSmurf(smurf.id));
+                        }}>
+                            <i className="fas fa-trash-alt"></i>
                         </Button>
                     </CardHeader>
                     <div className='card-inner'>
@@ -123,7 +128,6 @@ function App() {
             </Card>
             <h3>Current Smurfs:</h3><br/>
             <div className='smurf-container'>
-
                 {
                     Data.length === 0
                     ? <p>loading...</p>
